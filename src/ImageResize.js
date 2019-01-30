@@ -195,6 +195,6 @@ export default class ImageResize {
     };
 }
 
-if (Quill) {
-	Quill.register('modules/imageResize', ImageResize)
+if (window.Quill) {
+	window.Quill.register('modules/imageResize', ImageResize)
 }
