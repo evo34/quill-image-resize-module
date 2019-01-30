@@ -16,7 +16,7 @@ export default class ImageResize {
     constructor(quill, options = {}) {
         // save the quill reference and options
         this.quill = quill;
-
+        this.quillConstructor = Object.getPrototypeOf(quill).constructor
         // Apply the options to our defaults, and stash them for later
         // defaultsDeep doesn't do arrays as you'd expect, so we'll need to apply the classes array from options separately
         let moduleClasses = false;
@@ -188,13 +188,13 @@ export default class ImageResize {
     checkImage = (evt) => {
         if (this.img) {
             if (evt.keyCode == 46 || evt.keyCode == 8) {
-                window.Quill.find(this.img).deleteAt(0);
+                this.quillConstructor.find(this.img).deleteAt(0);
             }
             this.hide();
         }
     };
 }
 
-if (window.Quill) {
-    window.Quill.register('modules/imageResize', ImageResize);
+if (Quill) {
+	Quill.register('modules/imageResize', ImageResize)
 }
